@@ -1,0 +1,11 @@
+services:
+  mediabridge:
+    build: .
+    container_name: mediabridge
+
+    ports:
+      - "8000:8000"
+      
+    volumes:
+      - .:/app
+
