@@ -1,2 +1,2 @@
 # MediaBridge
-MediaBridge
+Collect. Organize. Watch.
