@@ -1,7 +1,13 @@
 from fastapi import APIRouter
 
-from app.schemas.youtube import DownloadRequest
-from app.services.youtube import download_video
+from app.schemas.youtube import (
+    DownloadRequest,
+    DownloadResponse,
+)
+from app.services.youtube import YoutubeService
+
+# Создаём сервис
+service = YoutubeService()
 
 router = APIRouter(
     prefix="/youtube",
@@ -12,8 +18,5 @@ router = APIRouter(
 @router.post("/download")
 def download(request: DownloadRequest):
 
-    download_video(request.url)
+    return service.download(request.url)
 
-    return {
-        "status": "accepted"
-    }
