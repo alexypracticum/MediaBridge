@@ -22,10 +22,6 @@
 ------------------------------------------------------------------
 🟢 Эпоха I — MVP
 
-"Я могу отправить ссылку — видео скачалось."
-Это самый важный этап.
-В конце него проект уже должен приносить пользу.
-
 MediaBridge
 
 ✓ принимает URL
@@ -35,24 +31,28 @@ MediaBridge
 ✓ Jellyfin видит новые файлы
 
 ---
-# Sprint 1
+# ✔ Sprint 1
 
-Создать репозиторий.
-MediaBridge
-README.md
-LICENSE
-.gitignore
-docker/
-backend/
-docs/
+✅ Создать репозиторий.
+✅ MediaBridge
+✅ README.md
+✅ LICENSE
+✅ .gitignore
+✅ docker/
+✅ backend/
+✅ docs/
 
 Результат:
 Есть репозиторий.
 
 ---
-# Sprint 2
+# ✔ Sprint 2
 
-Docker + FastAPI
+✅ VSCode Remote SSH
+✅ Docker
+✅ Docker Compose
+✅ FastAPI
+✅ Docker + FastAPI
 GET /
 ↓
 {
@@ -64,7 +64,21 @@ GET /
 API работает.
 
 ---
-# Sprint 3
+# ✔ Sprint 3
+
+✅ pyproject.toml
+✅ Pydantic Settings
+✅ .env.example
+✅ Logging
+✅ Lifespan
+✅ Banner
+
+Результат:
+Имеем баннер.
+Имеем логи.
+
+---
+#  Sprint 4
 
 Downloader
 POST /download
@@ -94,12 +108,6 @@ Archive
 Логи
 downloads.log
 Чтобы понимать что скачалось, когда, почему упало, 
-
-
----
-Первая версия готова.
-Можно пользоваться каждый день.
-Это важно.
 
 ----------------------------------------------------------------
 🔵 Эпоха II — Удобство
