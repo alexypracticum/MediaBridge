@@ -1,4 +1,6 @@
 [project]
+# [tool.setuptools.packages.find]
+# include = ["app*"]
 name = "mediabridge"
 version = "0.1.0"
 description = "Collect. Organize. Watch."
@@ -9,4 +11,7 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic-settings",
+    "pytest",
+    "httpx",
+    "yt-dlp",
 ]
