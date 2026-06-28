@@ -1,30 +1,36 @@
+from datetime import datetime
 from uuid import uuid4
 
-from app.core.logging import logger
+from app.models.download_job import DownloadJob
+from app.services.job_manager import job_manager
+from app.services.downloader import downloader
 
-from app.utils.process import run_command 
-
-from app.utils.commands import build_ytdlp_command
+from threading import Thread
 
 class YoutubeService:
 
     def download(self, url: str):
 
-        job_id = str(uuid4())
+        job = DownloadJob(
+            id=str(uuid4()),
+            url=url,
+            status="queued",
+            created_at=datetime.now(),
+        )
 
-        logger.info("Download requested")
-        logger.info("Job ID : %s", job_id)
-        logger.info("URL    : %s", url)
+        job_manager.add(job)
 
-        command = build_ytdlp_command(url)
+        thread = Thread(
+            target=downloader.download,
+            args=(job,),
+            daemon=True,
+        )
 
-        result = run_command(command)
-
-        logger.info("Return code: %s", result.returncode)
-        logger.info("STDOUT: %s", result.stdout)
-        logger.info("STDERR: %s", result.stderr)
+        thread.start()
 
         return {
-        "job_id": job_id,
-        "status": "queued",
+            "job_id": job.id,
+            "status": job.status,
         }
+
+        

@@ -5,6 +5,9 @@ Added
 - FastAPI
 - Docker
 - Logging
+- Downloading
+- Status
+- Thread
 
 Changed
 

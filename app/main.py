@@ -8,6 +8,8 @@ from app.core.logging import logger
 from app.routers import root
 from app.routers import youtube
 
+from app.routers.jobs import router as jobs_router
+
 # Наводим красоту
 SEPARATOR = "=" * 50
 
@@ -43,4 +45,4 @@ app = FastAPI(
 # Роуты
 app.include_router(root.router)
 app.include_router(youtube.router)
-
+app.include_router(jobs_router)

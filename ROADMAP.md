@@ -78,7 +78,7 @@ API работает.
 Имеем логи.
 
 ---
-# Sprint 4.5:
+# ✔ Sprint 4.5:
 
 ✅ подключаем pytest;
 ✅ пишем первые 2–3 теста;
@@ -86,14 +86,14 @@ API работает.
 ✅ добавляем команду pytest в проект.
 
 ---
-#  Sprint 4
+# ✔ Sprint 4
 
-Downloader
-POST /download
+✅ Downloader
+✅ POST /download
 ↓
-yt-dlp
+✅ yt-dlp
 ↓
-Видео
+✅ Видео
 
 Результат:
 Сервис реально качает видео.
