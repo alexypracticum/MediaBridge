@@ -8,7 +8,15 @@ def run_command(command: list[str]) -> subprocess.CompletedProcess:
         text=True,
     )
 
+def start_process(command: list[str]):
 
+    return subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE, # "Не выводи текст сразу в терминал. Отдай его мне."
+        stderr=subprocess.STDOUT,
+        text=True, # Чтобы получать строки "[download] 17.3%"
+        bufsize=1, # Включает построчную буферизацию.
+    )
 
 
 

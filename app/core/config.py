@@ -7,10 +7,13 @@ class Settings(BaseSettings):
     media_root: str = "/media"
     log_level: str = "INFO"
 
+    # Задаём папку сохранения по умолчанию
+    youtube_download_dir: str = "data/downloads/youtube"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",
     )
 
-
 settings = Settings()
+
