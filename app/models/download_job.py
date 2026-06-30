@@ -12,5 +12,5 @@ class DownloadJob:
     progress: float = 0.0
 
     title: str | None = None
-    filename: str | None = None
+    filepath: str | None = None
     error: str | None = None

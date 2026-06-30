@@ -40,6 +40,13 @@ class JobManager:
         if job:
             job.status = "failed"
             job.error = error
+    
+    def update_metadata(self, job_id: str, **kwargs):
+        job = self.get(job_id)
+
+        if job:
+            for key, value in kwargs.items():
+                setattr(job, key, value)
 
 
 job_manager = JobManager()

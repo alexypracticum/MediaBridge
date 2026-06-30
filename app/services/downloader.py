@@ -2,9 +2,35 @@ from app.core.logging import logger
 from app.services.job_manager import job_manager
 from app.utils.commands import build_ytdlp_command
 from app.models.download_job import DownloadJob
-# from app.utils.process import run_command 
 from app.utils.process import start_process
+from pathlib import Path
 
+def parse_metadata(line: str) -> dict:
+
+    metadata = {}
+
+    if "[download]" in line:
+
+        parts = line.split()
+
+        if (
+            len(parts) > 1
+            and parts[1].endswith("%")
+        ):
+            metadata["progress"] = float(
+                parts[1].replace("%", "")
+            )
+
+    if line.startswith("[download] Destination: "):
+
+        filepath = line.removeprefix(
+            "[download] Destination: "
+        ).strip()
+
+        metadata["filepath"] = filepath
+        metadata["title"] = Path(filepath).stem
+
+    return metadata
 
 class Downloader:
 
@@ -21,25 +47,12 @@ class Downloader:
         # красивый лог
         for line in process.stdout:  # Пока процесс работает, каждый раз, когда появилась новая строка, отдай её мне.
             
-            if "[download]" in line:
-
-                parts = line.split()
-
-                if len(parts) < 2:
-                    continue
-
-                if not parts[1].endswith("%"):
-                    continue
-
-                progress = float(parts[1].replace("%", ""))
-
-                job_manager.update_progress(job.id, progress)
-
-                # logger.info("Progress: %s", progress)
-
-                logger.info("DOWNLOAD LINE")
-            
             logger.info(line.rstrip())
+
+            metadata = parse_metadata(line)
+
+            if metadata:
+                job_manager.update_metadata(job.id, **metadata)
 
         process.wait()
 
@@ -49,7 +62,5 @@ class Downloader:
             job_manager.finish(job.id)
         else:
             job_manager.fail(job.id, "Download failed")
-
-
 
 downloader = Downloader()
