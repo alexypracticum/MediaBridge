@@ -10,7 +10,10 @@ class DownloadJob:
     created_at: datetime
 
     progress: float = 0.0
-
+    speed: str | None = None
+    eta: str | None = None
+    
     title: str | None = None
     filepath: str | None = None
     error: str | None = None
+    

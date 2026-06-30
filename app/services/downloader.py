@@ -13,6 +13,8 @@ def parse_metadata(line: str) -> dict:
 
         parts = line.split()
 
+        logger.info(parts)
+
         if (
             len(parts) > 1
             and parts[1].endswith("%")
@@ -20,6 +22,9 @@ def parse_metadata(line: str) -> dict:
             metadata["progress"] = float(
                 parts[1].replace("%", "")
             )
+            if "ETA" in parts:
+                metadata["speed"] = parts[5]
+                metadata["eta"] = parts[7]
 
     if line.startswith("[download] Destination: "):
 
