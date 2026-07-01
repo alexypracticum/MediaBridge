@@ -3,3 +3,4 @@
 - [ ] Parse "already downloaded"
 - [ ] Add already_exists/skipped status
 - [ ] Fill title/path for existing files
+- [ ] Support playlist as multiple DownloadJob objects.

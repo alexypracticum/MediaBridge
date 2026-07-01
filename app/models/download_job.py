@@ -16,4 +16,8 @@ class DownloadJob:
     title: str | None = None
     filepath: str | None = None
     error: str | None = None
+
+    playlist_title: str | None = None
+    playlist_index: int | None = None
+    playlist_count: int | None = None
     

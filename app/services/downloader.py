@@ -11,9 +11,24 @@ def parse_metadata(line: str) -> dict:
 
     if "[download]" in line:
 
-        parts = line.split()
+        
+        if line.startswith("[download] Downloading playlist: "):
+            metadata["playlist_title"] = line.removeprefix(
+                "[download] Downloading playlist: "
+            ).strip()
+
+        # Добавляем запятых
+        # parts = line.split()
 
         logger.info(parts)
+
+        if (
+            len(parts) >= 6
+            and parts[1] == "Downloading"
+            and parts[2] == "item"
+        ):
+            metadata["playlist_index"] = int(parts[3])
+            metadata["playlist_count"] = int(parts[5])
 
         if (
             len(parts) > 1
