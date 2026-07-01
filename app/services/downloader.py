@@ -18,7 +18,7 @@ def parse_metadata(line: str) -> dict:
             ).strip()
 
         # Добавляем запятых
-        # parts = line.split()
+        parts = line.split()
 
         logger.info(parts)
 
@@ -55,7 +55,7 @@ def parse_metadata(line: str) -> dict:
 class Downloader:
 
     def download(self, job: DownloadJob):
-        job_manager.update_status(job.id, "running")
+        job_manager.update_metadata(job.id, status="running")
 
         command = build_ytdlp_command(job.url)
 
@@ -79,8 +79,16 @@ class Downloader:
         logger.info("Return code: %s", process.returncode)
 
         if process.returncode == 0:
-            job_manager.finish(job.id)
+            job_manager.update_metadata(
+                job.id,
+                status="finished",
+                progress=100,
+            )
         else:
-            job_manager.fail(job.id, "Download failed")
+            job_manager.update_metadata(
+                job.id,
+                status="failed",
+                error="Download failed",
+            )
 
 downloader = Downloader()
